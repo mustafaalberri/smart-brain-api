@@ -16,9 +16,10 @@
 Please contact Mustafa Alberri: (E-mail) *mustafaalberri@gmail.com* for support.
 
 ## Installation
-Navigate to the project folder, then run `npm install`. Once installation is complete, run `node server.js`.
+Navigate to the project folder, then run `npm install`. 
 
 ## How to Run The App
+Once installation is complete, run `node server.js`.
 
 ## Technologies Used
 The technologies used in the creation of the app are: Javascript ES6, HTML, CSS, Node.js.
