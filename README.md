@@ -8,7 +8,6 @@
 * [How to Run The App](#how-to-run-the-app)
 * [Technologies Used](#technologies-used)
 * [Authors and Acknowledgment](#authors-and-acknowledgment)
-* [References](#references)
 
 ## Overview
 This is the API web server for my smart brain face detection app. It is based on Node and Express.
@@ -24,3 +23,6 @@ Once installation is complete, run `node server.js`.
 
 ## Technologies Used
 The technologies used in the creation of the app are: Javascript, Node.js, Express.js, Bcrypt, Clarifai gRPC API, Knex.
+
+## Authors and Acknowledgment
+This app was developed by Mustafa Alberri as part of the ZTM Web Development course on Udemy.
