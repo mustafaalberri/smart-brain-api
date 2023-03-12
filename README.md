@@ -22,7 +22,7 @@ Navigate to the project folder, then run `npm install`.
 Once installation is complete, run `node server.js`.
 
 ## Technologies Used
-The technologies used in the creation of the app are: Javascript ES6, HTML, CSS, Node.js.
+The technologies used in the creation of the app are: Javascript, Node.js, Express.js, Bcrypt, Clarifai gRPC API, Knex.
 
 ## Authors and Acknowledgment
 
