@@ -16,6 +16,7 @@
 Please contact Mustafa Alberri: (E-mail) *mustafaalberri@gmail.com* for support.
 
 ## Installation
+Navigate to the project folder, then run `npm install`. Once installation is complete, run `node server.js`.
 
 ## How to Run The App
 
