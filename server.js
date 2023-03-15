@@ -33,10 +33,10 @@ const redisStore = new RedisStore({
 app.use(session({
   secret: "mytopsecretsession",
   cookie: {
-    path: '/',
-    httpOnly: false,
-    secure: true,
-    sameSite: 'none',
+    // path: '/',
+    // httpOnly: false,
+    // secure: true,
+    // sameSite: 'none',
     maxAge: 1000 * 60 * 60, // 60 minutes
   },
   resave: true,
