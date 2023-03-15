@@ -1,24 +1,47 @@
 const express = require('express');
+const session = require('express-session');
+const cors = require('cors');
+const bcrypt = require('bcrypt');
+const knex = require('knex');
 
 const app = express();
 
-/* Middleware*/
+const RedisStore = require("connect-redis").default;
+const redis = require('redis');
+
+const redisClient = redis.createClient()
+redisClient.connect().catch(console.error)
+
+const redisStore = new RedisStore({
+  client: redisClient,
+  host: 'red-cg933vvdvk4ldlbrmbbg',
+  port: 6379,
+  prefix: 'smartBrain:',
+  logErrors: true,
+});
+
+app.use(session({
+  secret: "mytopsecretsession",
+  cookie: {
+    path: '/',
+    httpOnly: false,
+    secure: true,
+    sameSite: 'none',
+    maxAge: 1000 * 60 * 60, // 60 minutes
+  },
+  resave: true,
+  saveUninitialized: false,
+  store: redisStore,
+}));
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-const cors = require('cors');
-app.use(cors());
-
-// Bcrypt hashing
-const bcrypt = require('bcrypt');
-
-const users = require('./controllers/users');
-const register = require('./controllers/register');
-const signin = require('./controllers/signin');
-const profile = require('./controllers/profile');
-const image = require('./controllers/image');
-
-const knex = require('knex');
+app.use(cors({
+  origin: 'https://mustafaalberri.github.io/',
+  credentials: true,
+  allowedHeaders: ['Content-Type'],
+}));
 
 const db = knex({
     client: 'pg',
@@ -31,7 +54,12 @@ const db = knex({
     }
   });
 
-// Setup Server.
+const users = require('./controllers/users');
+const register = require('./controllers/register');
+const signin = require('./controllers/signin');
+const profile = require('./controllers/profile');
+const image = require('./controllers/image');
+
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log(`Server is up and running with port: ${port}`);
@@ -43,3 +71,5 @@ app.post('/register', (req, res) => register.handleRegister(req, res, db, bcrypt
 app.get('/profile/:id', (req, res) => profile.getProfile(req, res, db));
 app.put('/image', (req, res) => image.incrementEntries(req, res, db));
 app.post('/detect', (req,res) => image.imageDetect(req,res));
+app.get('/loggedin', (req, res) => signin.handleLogin(req, res, db));
+app.get('/logout', (req, res) => signin.handleLogout(req, res));
