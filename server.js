@@ -9,12 +9,13 @@ const app = express();
 const RedisStore = require("connect-redis").default;
 const redis = require('redis');
 
-const redisClient = redis.createClient()
+const redisClient = redis.createClient({
+  url: 'redis://red-cg933vvdvk4ldlbrmbbg:6379',
+})
 redisClient.connect().catch(console.error)
 
 const redisStore = new RedisStore({
   client: redisClient,
-  url: 'redis://red-cg933vvdvk4ldlbrmbbg:6379',
   logErrors: true,
 });
 
