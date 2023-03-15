@@ -10,15 +10,25 @@ const RedisStore = require("connect-redis").default;
 const redis = require('redis');
 
 const redisClient = redis.createClient({
-  socket: {
-    url: 'redis://red-cg933vvdvk4ldlbrmbbg:6379'
-  }
+  host: 'red-cg933vvdvk4ldlbrmbbg',
+  port: 6379,
 })
-redisClient.connect().catch(console.error)
+// redisClient.connect().catch(console.error)
+
+// Test the connection
+redisClient.on('connect', () => {
+  console.log('Connected to Redis');
+});
+
+redisClient.on('error', (err) => {
+  console.error('Redis connection error:', err);
+});
 
 const redisStore = new RedisStore({
   client: redisClient,
-  logErrors: true,
+  prefix: 'session:',
+  ttl: 3600 * 24, // 1 hour
+  // logErrors: true,
 });
 
 app.use(session({
