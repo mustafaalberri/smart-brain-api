@@ -14,9 +14,7 @@ redisClient.connect().catch(console.error)
 
 const redisStore = new RedisStore({
   client: redisClient,
-  host: 'red-cg933vvdvk4ldlbrmbbg',
-  port: 6379,
-  prefix: 'smartBrain:',
+  url: 'redis://red-cg933vvdvk4ldlbrmbbg:6379',
   logErrors: true,
 });
 
