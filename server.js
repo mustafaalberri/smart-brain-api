@@ -38,7 +38,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use(cors({
-  origin: 'https://mustafaalberri.github.io/',
+  origin: 'https://mustafaalberri.github.io',
   credentials: true,
   allowedHeaders: ['Content-Type'],
 }));
