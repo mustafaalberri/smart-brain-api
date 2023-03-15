@@ -13,9 +13,8 @@ const redisClient = redis.createClient({
   host: 'red-cg933vvdvk4ldlbrmbbg',
   port: 6379,
 })
-// redisClient.connect().catch(console.error)
 
-// Test the connection
+// Test connection
 redisClient.on('connect', () => {
   console.log('Connected to Redis');
 });
@@ -27,8 +26,8 @@ redisClient.on('error', (err) => {
 const redisStore = new RedisStore({
   client: redisClient,
   prefix: 'session:',
-  ttl: 3600 * 24, // 1 hour
-  // logErrors: true,
+  ttl: 3600 * 24, // 1 day
+  logErrors: true,
 });
 
 app.use(session({
