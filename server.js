@@ -10,9 +10,10 @@ const RedisStore = require("connect-redis").default;
 const redis = require('redis');
 
 const redisClient = redis.createClient({
-  // url: 'redis://red-cg933vvdvk4ldlbrmbbg:6379',
-  host: 'red-cg933vvdvk4ldlbrmbbg',
-  port: '6379'
+  socket: {
+    host: 'red-cg933vvdvk4ldlbrmbbg',
+    port: '6379'
+  }
 })
 redisClient.connect().catch(console.error)
 
