@@ -11,8 +11,7 @@ const redis = require('redis');
 
 const redisClient = redis.createClient({
   socket: {
-    host: 'red-cg933vvdvk4ldlbrmbbg',
-    port: '6379'
+    url: 'redis://red-cg933vvdvk4ldlbrmbbg:6379'
   }
 })
 redisClient.connect().catch(console.error)
