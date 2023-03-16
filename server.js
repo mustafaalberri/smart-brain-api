@@ -3,9 +3,9 @@ const session = require('express-session');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const knex = require('knex');
-const dotenv = require('dotenv');
+// const dotenv = require('dotenv');
 
-dotenv.config();
+// dotenv.config();
 
 const app = express();
 
@@ -59,10 +59,10 @@ app.use(cors({
 const db = knex({
     client: 'pg',
     connection: {
-      host : process.env.DB_HOST,
+      host : 'dpg-cg7fr3pmbg5ab7g73ts0-a',
       port : 5432,
       user : 'sm_db_user',
-      password : process.env.DB_PASS,
+      password : 'B9TVgUg49I60PH0U2aeJreaxMN4iYk98',
       database : 'sm_db'
     }
   });
