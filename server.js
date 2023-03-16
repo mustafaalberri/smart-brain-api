@@ -3,9 +3,6 @@ const session = require('express-session');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const knex = require('knex');
-// const dotenv = require('dotenv');
-
-// dotenv.config();
 
 const app = express();
 
@@ -13,8 +10,8 @@ const RedisStore = require("connect-redis").default;
 const redis = require('redis');
 
 const redisClient = redis.createClient({
-  host: process.env.REDIS_HOST,
-  port: process.env.REDIS_PORT,
+  host: 'red-cg933vvdvk4ldlbrmbbg',
+  port: 6379,
 })
 
 // Test connection
@@ -34,7 +31,7 @@ const redisStore = new RedisStore({
 });
 
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: "mytopsecretsession",
   cookie: {
     path: '/',
     httpOnly: false,
@@ -78,13 +75,11 @@ app.listen(port, () => {
     console.log(`Server is up and running with port: ${port}`);
 });
 
-const pat = process.env.PAT;
-
 app.get('/users', (req, res) => users.getUsers(req,res, db));
 app.post('/signin', (req, res) => signin.handleSignIn(req, res, db, bcrypt));
 app.post('/register', (req, res) => register.handleRegister(req, res, db, bcrypt));
 app.get('/profile/:id', (req, res) => profile.getProfile(req, res, db));
 app.put('/image', (req, res) => image.incrementEntries(req, res, db));
-app.post('/detect', (req,res) => image.imageDetect(req,res, pat));
+app.post('/detect', (req,res) => image.imageDetect(req,res));
 app.get('/loggedin', (req, res) => signin.handleLogin(req, res, db));
 app.get('/logout', (req, res) => signin.handleLogout(req, res));
