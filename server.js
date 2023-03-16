@@ -3,6 +3,9 @@ const session = require('express-session');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const knex = require('knex');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app = express();
 
@@ -10,8 +13,8 @@ const RedisStore = require("connect-redis").default;
 const redis = require('redis');
 
 const redisClient = redis.createClient({
-  host: 'red-cg933vvdvk4ldlbrmbbg',
-  port: 6379,
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
 })
 
 // Test connection
@@ -31,7 +34,7 @@ const redisStore = new RedisStore({
 });
 
 app.use(session({
-  secret: "mytopsecretsession",
+  secret: process.env.SESSION_SECRET,
   cookie: {
     path: '/',
     httpOnly: false,
@@ -56,10 +59,10 @@ app.use(cors({
 const db = knex({
     client: 'pg',
     connection: {
-      host : 'dpg-cg7fr3pmbg5ab7g73ts0-a',
+      host : process.env.DB_HOST,
       port : 5432,
       user : 'sm_db_user',
-      password : 'B9TVgUg49I60PH0U2aeJreaxMN4iYk98',
+      password : process.env.DB_PASS,
       database : 'sm_db'
     }
   });
