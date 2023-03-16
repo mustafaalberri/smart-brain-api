@@ -1,7 +1,7 @@
 const { ClarifaiStub, grpc } = require("clarifai-nodejs-grpc");
 
-const imageDetect = (req, res) => {
-    const PAT = '1e6976540a28462887b9c54c98b7dd3f';
+const imageDetect = (req, res, pat) => {
+    const PAT = pat;
     const USER_ID = 'clarifai';
     const APP_ID = 'main';
     const MODEL_ID = 'face-detection';

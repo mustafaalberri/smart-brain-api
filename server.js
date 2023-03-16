@@ -78,11 +78,13 @@ app.listen(port, () => {
     console.log(`Server is up and running with port: ${port}`);
 });
 
+const pat = process.env.PAT;
+
 app.get('/users', (req, res) => users.getUsers(req,res, db));
 app.post('/signin', (req, res) => signin.handleSignIn(req, res, db, bcrypt));
 app.post('/register', (req, res) => register.handleRegister(req, res, db, bcrypt));
 app.get('/profile/:id', (req, res) => profile.getProfile(req, res, db));
 app.put('/image', (req, res) => image.incrementEntries(req, res, db));
-app.post('/detect', (req,res) => image.imageDetect(req,res));
+app.post('/detect', (req,res) => image.imageDetect(req,res, pat));
 app.get('/loggedin', (req, res) => signin.handleLogin(req, res, db));
 app.get('/logout', (req, res) => signin.handleLogout(req, res));
